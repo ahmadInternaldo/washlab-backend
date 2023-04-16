@@ -1,1 +1,3 @@
-export interface UserInterface {}
+export interface UserInterface {
+  full_name: string;
+}

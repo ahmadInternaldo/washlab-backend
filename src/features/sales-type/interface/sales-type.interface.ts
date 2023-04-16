@@ -1,1 +1,3 @@
-export interface SalesTypeInterface {}
+export interface SalesTypeInterface {
+  name: string;
+}

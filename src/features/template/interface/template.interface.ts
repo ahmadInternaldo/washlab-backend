@@ -1,1 +1,3 @@
-export interface TemplateInterface {}
+export interface TemplateInterface {
+  name: string;
+}

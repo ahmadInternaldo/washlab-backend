@@ -1,1 +1,3 @@
-export interface OutletInterface {}
+export interface OutletInterface {
+  name: string;
+}

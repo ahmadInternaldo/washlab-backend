@@ -1,1 +1,3 @@
-export interface InvoiceInterface {}
+export interface InvoiceInterface {
+  name: string;
+}

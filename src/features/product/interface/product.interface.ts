@@ -1,1 +1,3 @@
-export interface ProductInterface {}
+export interface ProductInterface {
+  name: string;
+}

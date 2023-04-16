@@ -1,1 +1,3 @@
-export interface CashierInterface {}
+export interface CashierInterface {
+  name: string;
+}

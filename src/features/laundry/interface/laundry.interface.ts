@@ -1,1 +1,3 @@
-export interface LaundryInterface {}
+export interface LaundryInterface {
+  name: string;
+}
