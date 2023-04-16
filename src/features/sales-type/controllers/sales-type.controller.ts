@@ -42,7 +42,7 @@ export class SalesTypeController {
   }
 
   @Get(':uuid')
-  async findOneUser(@Param() uuid: string): Promise<any> {
+  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
     try {
       const data = await this.service.findOne(uuid);
       return data;
@@ -53,7 +53,7 @@ export class SalesTypeController {
 
   @Patch(':uuid')
   async updateUser(
-    @Param() uuid: string,
+    @Param('uuid') uuid: string,
     @Body() salesTypeUpdateDto: SalesTypeUpdateDto,
   ): Promise<any> {
     try {
@@ -65,7 +65,7 @@ export class SalesTypeController {
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param() uuid: string): Promise<any> {
+  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
     try {
       const data = await this.service.findOne(uuid);
       await this.service.delete(uuid);

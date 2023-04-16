@@ -40,7 +40,7 @@ export class CashierController {
   }
 
   @Get(':uuid')
-  async findOneUser(@Param() uuid: string): Promise<any> {
+  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
     try {
       const data = await this.service.findOne(uuid);
       return data;
@@ -51,7 +51,7 @@ export class CashierController {
 
   @Patch(':uuid')
   async updateUser(
-    @Param() uuid: string,
+    @Param('uuid') uuid: string,
     @Body() cashierUpdateDto: CashierUpdateDto,
   ): Promise<any> {
     try {
@@ -63,7 +63,7 @@ export class CashierController {
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param() uuid: string): Promise<any> {
+  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
     try {
       const data = await this.service.findOne(uuid);
       await this.service.delete(uuid);
