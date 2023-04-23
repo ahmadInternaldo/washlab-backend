@@ -65,13 +65,9 @@ export class UserEntity extends BaseEntity implements UserInterface {
   @Column('varchar', { name: 'pict_url', nullable: true })
   pict_url?: string;
 
-
   // relation to outlet
-  @OneToMany(
-    () => OutletEntity,
-    (outlet) => outlet.user, {
-      cascade: true,
-    }
-  )
-  outlets: OutletInterface[]
+  @OneToMany(() => OutletEntity, (outlet) => outlet.user, {
+    cascade: true,
+  })
+  outlets: OutletInterface[];
 }

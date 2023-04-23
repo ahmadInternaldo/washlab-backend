@@ -1,7 +1,7 @@
-import { OutletInterface } from "src/features/outlet/interface/outlet.interface";
-import { UserInterface, UserRoleEnum } from "../interface/user.interface";
+import { OutletInterface } from 'src/features/outlet/interface/outlet.interface';
+import { UserInterface, UserRoleEnum } from '../interface/user.interface';
 
-export class UserCreateDto implements UserInterface{
+export class UserCreateDto implements UserInterface {
   username: string;
   hash: string;
   phone?: string;
@@ -17,5 +17,4 @@ export class UserCreateDto implements UserInterface{
   role: UserRoleEnum;
   pict_url?: string;
   outlets: OutletInterface[];
-
 }

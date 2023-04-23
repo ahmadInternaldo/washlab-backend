@@ -1,4 +1,4 @@
-import { UserInterface } from "../../../features/user/interface/user.interface";
+import { UserInterface } from '../../../features/user/interface/user.interface';
 
 export interface OutletInterface {
   name: string; // unique
@@ -12,7 +12,7 @@ export interface OutletInterface {
   updated_at?: Date;
   deleted_at?: Date;
   user_uuid: string;
-  user: UserInterface
+  user: UserInterface;
 }
 
 export enum OutletStatusEnum {

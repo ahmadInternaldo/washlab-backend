@@ -191,19 +191,16 @@ describe('Controller Test', () => {
   // User test
   describe('user', () => {
     it('should create user', async () => {
-      const data = await userController.createUser(
-
-        {
-          username: 'admin1',
-          hash: 'password',
-          full_name: 'admin1',
-          first_name: 'admin',
-          last_name: '1',
-          created_at: new Date(),
-          role: UserRoleEnum.ADMIN,
-          outlets: []
-        }
-      );
+      const data = await userController.createUser({
+        username: 'admin1',
+        hash: 'password',
+        full_name: 'admin1',
+        first_name: 'admin',
+        last_name: '1',
+        created_at: new Date(),
+        role: UserRoleEnum.ADMIN,
+        outlets: [],
+      });
       user = data;
       expect(data).toBeDefined();
     });
@@ -227,8 +224,6 @@ describe('Controller Test', () => {
       });
       expect(data).toBeDefined();
     });
-
-
   });
 
   // Cashier test
@@ -268,16 +263,15 @@ describe('Controller Test', () => {
   // Outlet test
   describe('outlet', () => {
     it('should create outlet', async () => {
-      const data = await outletController.createOutlet(
-        {
-          name: 'outlet1',
-          code: 'OUT1',
-          status: OutletStatusEnum.ACTIVE,
-          creator_uuid: user.uuid,
-          created_at: new Date(),
-          user_uuid: user.uuid,
-          user: user
-        });
+      const data = await outletController.createOutlet({
+        name: 'outlet1',
+        code: 'OUT1',
+        status: OutletStatusEnum.ACTIVE,
+        creator_uuid: user.uuid,
+        created_at: new Date(),
+        user_uuid: user.uuid,
+        user: user,
+      });
       outlet = data;
       expect(data).toBeDefined();
     });
@@ -301,8 +295,6 @@ describe('Controller Test', () => {
       });
       expect(data).toBeDefined();
     });
-
-
   });
 
   // Laundry test
@@ -478,7 +470,6 @@ describe('Controller Test', () => {
   });
 
   describe('all delete', () => {
-
     it('should delete outlet', async () => {
       const data = await outletController.deleteOutlet(outlet.uuid);
       expect(data).toBeDefined();
@@ -488,5 +479,5 @@ describe('Controller Test', () => {
       const data = await userController.deleteUser(user.uuid);
       expect(data).toBeDefined();
     });
-  })
+  });
 });

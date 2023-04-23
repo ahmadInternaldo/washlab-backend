@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import {
   OutletInterface,
   OutletStatusEnum,
@@ -49,13 +56,10 @@ export class OutletEntity extends BaseEntity implements OutletInterface {
   @Column('varchar', { name: 'user_uuid', nullable: false })
   user_uuid: string;
 
-  @ManyToOne(
-    () => UserEntity,
-    (user) => user.outlets, {
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
-    }
-  )
+  @ManyToOne(() => UserEntity, (user) => user.outlets, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'user_uuid' })
-  user: UserInterface
+  user: UserInterface;
 }

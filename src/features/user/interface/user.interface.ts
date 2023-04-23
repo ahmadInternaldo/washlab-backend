@@ -1,4 +1,4 @@
-import { OutletInterface } from "../../../features/outlet/interface/outlet.interface";
+import { OutletInterface } from '../../../features/outlet/interface/outlet.interface';
 
 export interface UserInterface {
   username: string;
@@ -15,7 +15,7 @@ export interface UserInterface {
   deleted_at?: Date;
   role: UserRoleEnum;
   pict_url?: string;
-  outlets: OutletInterface[]
+  outlets: OutletInterface[];
 }
 
 export enum UserRoleEnum {
