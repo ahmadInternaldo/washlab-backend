@@ -16,7 +16,7 @@ import { ProductPaginationDto } from '../dto/pagination.dto';
 
 @Controller('products')
 export class ProductController {
-  constructor(private service: ProductService) {}
+    constructor(private service: ProductService) {}
 
   @Get()
   async findAllProduct(@Query() params: ProductPaginationDto): Promise<any> {
