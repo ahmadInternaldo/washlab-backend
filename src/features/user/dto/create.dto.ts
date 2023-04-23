@@ -1,1 +1,3 @@
-export class UserCreateDto {}
+export class UserCreateDto {
+  full_name: string;
+}

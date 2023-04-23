@@ -20,56 +20,48 @@ import { ApiTags } from '@nestjs/swagger';
 export class InvoiceController {
   constructor(private service: InvoiceService) {}
   @Get()
-  async findAllUser(@Query() params: InvoicePaginationDto): Promise<any> {
+  async findAllInvoice(@Query() params: InvoicePaginationDto): Promise<any> {
     try {
-      const datas = await this.service.findAll(params);
+      const datas = await this.service.findAllInvoice(params);
       return datas;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Post()
-  async createUser(@Body() invoiceCreateDto: InvoiceCreateDto): Promise<any> {
+  async createInvoice(
+    @Body() invoiceCreateDto: InvoiceCreateDto,
+  ): Promise<any> {
     try {
-      const data = await this.service.create(invoiceCreateDto);
+      const data = await this.service.createInvoice(invoiceCreateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Get(':uuid')
-  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
+  async findOneInvoice(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
+      const data = await this.service.findOneInvoice(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Patch(':uuid')
-  async updateUser(
+  async updateInvoice(
     @Param('uuid') uuid: string,
     @Body() invoiceUpdateDto: InvoiceUpdateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.update(uuid, invoiceUpdateDto);
+      const data = await this.service.updateInvoice(uuid, invoiceUpdateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
+  async deleteInvoice(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
-      await this.service.delete(uuid);
+      const data = await this.service.findOneInvoice(uuid);
+      await this.service.deleteInvoice(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 }

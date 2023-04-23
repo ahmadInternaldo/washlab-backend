@@ -19,57 +19,50 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('cashiers')
 export class CashierController {
   constructor(private service: CashierService) {}
+
   @Get()
-  async findAllUser(@Query() params: CashierPaginationDto): Promise<any> {
+  async findAllCashier(@Query() params: CashierPaginationDto): Promise<any> {
     try {
-      const datas = await this.service.findAll(params);
+      const datas = await this.service.findAllCashier(params);
       return datas;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Post()
-  async createUser(@Body() cashierCreateDto: CashierCreateDto): Promise<any> {
+  async createCashier(
+    @Body() cashierCreateDto: CashierCreateDto,
+  ): Promise<any> {
     try {
-      const data = await this.service.create(cashierCreateDto);
+      const data = await this.service.createCashier(cashierCreateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Get(':uuid')
-  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
+  async findOneCashier(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
+      const data = await this.service.findOneCashier(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Patch(':uuid')
-  async updateUser(
+  async updateCashier(
     @Param('uuid') uuid: string,
     @Body() cashierUpdateDto: CashierUpdateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.update(uuid, cashierUpdateDto);
+      const data = await this.service.updateCashier(uuid, cashierUpdateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
+  async deleteCashier(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
-      await this.service.delete(uuid);
+      const data = await this.service.findOneCashier(uuid);
+      await this.service.deleteCashier(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 }

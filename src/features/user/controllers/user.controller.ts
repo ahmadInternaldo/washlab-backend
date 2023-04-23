@@ -22,31 +22,25 @@ export class UserController {
   @Get()
   async findAllUser(@Query() params: UserPaginationDto): Promise<any> {
     try {
-      const datas = await this.service.findAll(params);
+      const datas = await this.service.findAllUser(params);
       return datas;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Post()
   async createUser(@Body() userCreateDto: UserCreateDto): Promise<any> {
     try {
-      const data = await this.service.create(userCreateDto);
+      const data = await this.service.createUser(userCreateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Get(':uuid')
   async findOneUser(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
+      const data = await this.service.findOneUser(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Patch(':uuid')
@@ -55,21 +49,17 @@ export class UserController {
     @Body() userUpdateDto: UserUpdateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.update(uuid, userUpdateDto);
+      const data = await this.service.updateUser(uuid, userUpdateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Delete(':uuid')
   async deleteUser(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
-      await this.service.delete(uuid);
+      const data = await this.service.findOneUser(uuid);
+      await this.service.deleteUser(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 }

@@ -13,27 +13,22 @@ export class CustomerService {
     private repository: Repository<CustomerEntity>,
   ) {}
 
-  async findAll(params: CustomerPaginationDto): Promise<any> {
+  async findAllCustomer(params: CustomerPaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async create(customerCreateDto: CustomerCreateDto): Promise<any> {
+  async createCustomer(customerCreateDto: CustomerCreateDto): Promise<any> {
     try {
       const createData = this.repository.create(customerCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async findOne(uuid: string): Promise<any> {
+  async findOneCustomer(uuid: string): Promise<any> {
     try {
       const data = await this.repository.findOne({
         where: {
@@ -41,12 +36,10 @@ export class CustomerService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async update(
+  async updateCustomer(
     uuid: string,
     CustomerUpdateDto: CustomerUpdateDto,
   ): Promise<any> {
@@ -56,17 +49,13 @@ export class CustomerService {
         ...CustomerUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async delete(uuid: string): Promise<any> {
+  async deleteCustomer(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }

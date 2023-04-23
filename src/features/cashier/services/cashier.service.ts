@@ -13,27 +13,22 @@ export class CashierService {
     private repository: Repository<CashierEntity>,
   ) {}
 
-  async findAll(params: CashierPaginationDto): Promise<any> {
+  async findAllCashier(params: CashierPaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async create(cashierCreateDto: CashierCreateDto): Promise<any> {
+  async createCashier(cashierCreateDto: CashierCreateDto): Promise<any> {
     try {
       const createData = this.repository.create(cashierCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async findOne(uuid: string): Promise<any> {
+  async findOneCashier(uuid: string): Promise<any> {
     try {
       const data = await this.repository.findOne({
         where: {
@@ -41,29 +36,26 @@ export class CashierService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async update(uuid: string, CashierUpdateDto: CashierUpdateDto): Promise<any> {
+  async updateCashier(
+    uuid: string,
+    CashierUpdateDto: CashierUpdateDto,
+  ): Promise<any> {
     try {
       const updatedData = await this.repository.save({
         uuid,
         ...CashierUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async delete(uuid: string): Promise<any> {
+  async deleteCashier(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }

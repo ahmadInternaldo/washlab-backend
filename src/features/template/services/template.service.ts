@@ -15,12 +15,9 @@ export class TemplateService {
 
   async findAll(params: TemplatePaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
   async create(templateCreateDto: TemplateCreateDto): Promise<any> {
@@ -28,9 +25,7 @@ export class TemplateService {
       const createData = this.repository.create(templateCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
   async findOne(uuid: string): Promise<any> {
@@ -41,9 +36,7 @@ export class TemplateService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
   async update(
@@ -56,17 +49,13 @@ export class TemplateService {
         ...TemplateUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
   async delete(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }

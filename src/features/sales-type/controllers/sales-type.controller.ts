@@ -20,58 +20,50 @@ import { ApiTags } from '@nestjs/swagger';
 export class SalesTypeController {
   constructor(private service: SalesTypeService) {}
   @Get()
-  async findAllUser(@Query() params: SalesTypePaginationDto): Promise<any> {
+  async findAllSalesType(
+    @Query() params: SalesTypePaginationDto,
+  ): Promise<any> {
     try {
-      const datas = await this.service.findAll(params);
+      const datas = await this.service.findAllSalesType(params);
       return datas;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Post()
-  async createUser(
+  async createSalesType(
     @Body() salesTypeCreateDto: SalesTypeCreateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.create(salesTypeCreateDto);
+      const data = await this.service.createSalesType(salesTypeCreateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Get(':uuid')
-  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
+  async findOneSalesType(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
+      const data = await this.service.findOneSalesType(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Patch(':uuid')
-  async updateUser(
+  async updateSalesType(
     @Param('uuid') uuid: string,
     @Body() salesTypeUpdateDto: SalesTypeUpdateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.update(uuid, salesTypeUpdateDto);
+      const data = await this.service.updateSalesType(uuid, salesTypeUpdateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
+  async deleteSalesType(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
-      await this.service.delete(uuid);
+      const data = await this.service.findOneSalesType(uuid);
+      await this.service.deleteSalesType(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 }

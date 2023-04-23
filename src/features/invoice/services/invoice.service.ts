@@ -13,27 +13,22 @@ export class InvoiceService {
     private repository: Repository<InvoiceEntity>,
   ) {}
 
-  async findAll(params: InvoicePaginationDto): Promise<any> {
+  async findAllInvoice(params: InvoicePaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async create(invoiceCreateDto: InvoiceCreateDto): Promise<any> {
+  async createInvoice(invoiceCreateDto: InvoiceCreateDto): Promise<any> {
     try {
       const createData = this.repository.create(invoiceCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async findOne(uuid: string): Promise<any> {
+  async findOneInvoice(uuid: string): Promise<any> {
     try {
       const data = await this.repository.findOne({
         where: {
@@ -41,29 +36,26 @@ export class InvoiceService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async update(uuid: string, InvoiceUpdateDto: InvoiceUpdateDto): Promise<any> {
+  async updateInvoice(
+    uuid: string,
+    InvoiceUpdateDto: InvoiceUpdateDto,
+  ): Promise<any> {
     try {
       const updatedData = await this.repository.save({
         uuid,
         ...InvoiceUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async delete(uuid: string): Promise<any> {
+  async deleteInvoice(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }

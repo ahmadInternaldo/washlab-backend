@@ -13,27 +13,22 @@ export class OutletService {
     private repository: Repository<OutletEntity>,
   ) {}
 
-  async findAll(params: OutletPaginationDto): Promise<any> {
+  async findAllOutlet(params: OutletPaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async create(outletCreateDto: OutletCreateDto): Promise<any> {
+  async createOutlet(outletCreateDto: OutletCreateDto): Promise<any> {
     try {
       const createData = this.repository.create(outletCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async findOne(uuid: string): Promise<any> {
+  async findOneOutlet(uuid: string): Promise<any> {
     try {
       const data = await this.repository.findOne({
         where: {
@@ -41,29 +36,26 @@ export class OutletService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async update(uuid: string, OutletUpdateDto: OutletUpdateDto): Promise<any> {
+  async updateOutlet(
+    uuid: string,
+    OutletUpdateDto: OutletUpdateDto,
+  ): Promise<any> {
     try {
       const updatedData = await this.repository.save({
         uuid,
         ...OutletUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async delete(uuid: string): Promise<any> {
+  async deleteOutlet(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }

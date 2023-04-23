@@ -13,27 +13,22 @@ export class LaundryService {
     private repository: Repository<LaundryEntity>,
   ) {}
 
-  async findAll(params: LaundryPaginationDto): Promise<any> {
+  async findAllLaundry(params: LaundryPaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async create(laundryCreateDto: LaundryCreateDto): Promise<any> {
+  async createLaundry(laundryCreateDto: LaundryCreateDto): Promise<any> {
     try {
       const createData = this.repository.create(laundryCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async findOne(uuid: string): Promise<any> {
+  async findOneLaundry(uuid: string): Promise<any> {
     try {
       const data = await this.repository.findOne({
         where: {
@@ -41,29 +36,26 @@ export class LaundryService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async update(uuid: string, LaundryUpdateDto: LaundryUpdateDto): Promise<any> {
+  async updateLaundry(
+    uuid: string,
+    LaundryUpdateDto: LaundryUpdateDto,
+  ): Promise<any> {
     try {
       const updatedData = await this.repository.save({
         uuid,
         ...LaundryUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async delete(uuid: string): Promise<any> {
+  async deleteLaundry(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }

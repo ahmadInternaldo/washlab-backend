@@ -20,56 +20,48 @@ import { ApiTags } from '@nestjs/swagger';
 export class LaundryController {
   constructor(private service: LaundryService) {}
   @Get()
-  async findAllUser(@Query() params: LaundryPaginationDto): Promise<any> {
+  async findAllLaundry(@Query() params: LaundryPaginationDto): Promise<any> {
     try {
-      const datas = await this.service.findAll(params);
+      const datas = await this.service.findAllLaundry(params);
       return datas;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Post()
-  async createUser(@Body() laundryCreateDto: LaundryCreateDto): Promise<any> {
+  async createLaundry(
+    @Body() laundryCreateDto: LaundryCreateDto,
+  ): Promise<any> {
     try {
-      const data = await this.service.create(laundryCreateDto);
+      const data = await this.service.createLaundry(laundryCreateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Get(':uuid')
-  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
+  async findOneLaundry(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
+      const data = await this.service.findOneLaundry(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Patch(':uuid')
-  async updateUser(
+  async updateLaundry(
     @Param('uuid') uuid: string,
     @Body() laundryUpdateDto: LaundryUpdateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.update(uuid, laundryUpdateDto);
+      const data = await this.service.updateLaundry(uuid, laundryUpdateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
+  async deleteLaundry(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
-      await this.service.delete(uuid);
+      const data = await this.service.findOneLaundry(uuid);
+      await this.service.deleteLaundry(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 }

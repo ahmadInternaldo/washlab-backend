@@ -17,57 +17,50 @@ import { ProductPaginationDto } from '../dto/pagination.dto';
 @Controller('products')
 export class ProductController {
   constructor(private service: ProductService) {}
+
   @Get()
-  async findAllUser(@Query() params: ProductPaginationDto): Promise<any> {
+  async findAllProduct(@Query() params: ProductPaginationDto): Promise<any> {
     try {
-      const datas = await this.service.findAll(params);
+      const datas = await this.service.findAllProduct(params);
       return datas;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Post()
-  async createUser(@Body() productCreateDto: ProductCreateDto): Promise<any> {
+  async createProduct(
+    @Body() productCreateDto: ProductCreateDto,
+  ): Promise<any> {
     try {
-      const data = await this.service.create(productCreateDto);
+      const data = await this.service.createProduct(productCreateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Get(':uuid')
-  async findOneUser(@Param('uuid') uuid: string): Promise<any> {
+  async findOneProduct(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
+      const data = await this.service.findOneProduct(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Patch(':uuid')
-  async updateUser(
+  async updateProduct(
     @Param('uuid') uuid: string,
     @Body() productUpdateDto: ProductUpdateDto,
   ): Promise<any> {
     try {
-      const data = await this.service.update(uuid, productUpdateDto);
+      const data = await this.service.updateProduct(uuid, productUpdateDto);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 
   @Delete(':uuid')
-  async deleteUser(@Param('uuid') uuid: string): Promise<any> {
+  async deleteProduct(@Param('uuid') uuid: string): Promise<any> {
     try {
-      const data = await this.service.findOne(uuid);
-      await this.service.delete(uuid);
+      const data = await this.service.findOneProduct(uuid);
+      await this.service.deleteProduct(uuid);
       return data;
-    } catch (error) {
-      throw new BadGatewayException();
-    }
+    } catch (error) {}
   }
 }

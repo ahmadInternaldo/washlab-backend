@@ -13,27 +13,22 @@ export class SalesTypeService {
     private repository: Repository<SalesTypeEntity>,
   ) {}
 
-  async findAll(params: SalesTypePaginationDto): Promise<any> {
+  async findAllSalesType(params: SalesTypePaginationDto): Promise<any> {
     try {
-      console.log(params);
       const datas = await this.repository.find();
       return datas;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async create(salesTypeCreateDto: SalesTypeCreateDto): Promise<any> {
+  async createSalesType(salesTypeCreateDto: SalesTypeCreateDto): Promise<any> {
     try {
       const createData = this.repository.create(salesTypeCreateDto);
       const savedData = await this.repository.save(createData);
       return savedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async findOne(uuid: string): Promise<any> {
+  async findOneSalesType(uuid: string): Promise<any> {
     try {
       const data = await this.repository.findOne({
         where: {
@@ -41,12 +36,10 @@ export class SalesTypeService {
         },
       });
       return data;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async update(
+  async updateSalesType(
     uuid: string,
     SalesTypeUpdateDto: SalesTypeUpdateDto,
   ): Promise<any> {
@@ -56,17 +49,13 @@ export class SalesTypeService {
         ...SalesTypeUpdateDto,
       });
       return updatedData;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 
-  async delete(uuid: string): Promise<any> {
+  async deleteSalesType(uuid: string): Promise<any> {
     try {
       await this.repository.delete(uuid);
       return;
-    } catch (error) {
-      throw new BadRequestException();
-    }
+    } catch (error) {}
   }
 }
