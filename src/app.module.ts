@@ -6,24 +6,27 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './features/user/controllers/user.controller';
 import { SalesTypeController } from './features/sales-type/controllers/sales-type.controller';
 import { OutletController } from './features/outlet/controllers/outlet.controller';
-import { LaundryController } from './features/laundry/controllers/laundry.controller';
+import { LaundryVariantController } from './features/laundry-variant/controllers/laundry-variant.controller';
 import { InvoiceController } from './features/invoice/controllers/invoice.controller';
 import { CustomerController } from './features/customer/controllers/customer.controller';
 import { CashierController } from './features/cashier/controllers/cashier.controller';
 import { UserService } from './features/user/services/user.service';
 import { SalesTypeService } from './features/sales-type/services/sales-type.service';
 import { OutletService } from './features/outlet/services/outlet.service';
-import { LaundryService } from './features/laundry/services/laundry.service';
+import { LaundryVariantService } from './features/laundry-variant/services/laundry-variant.service';
 import { InvoiceService } from './features/invoice/services/invoice.service';
 import { CustomerService } from './features/customer/services/customer.service';
 import { CashierService } from './features/cashier/services/cashier.service';
 import { UserEntity } from './features/user/entities/user.entity';
 import { SalesTypeEntity } from './features/sales-type/entities/sales-type.entity';
 import { OutletEntity } from './features/outlet/entities/outlet.entity';
-import { LaundryEntity } from './features/laundry/entities/laundry.entity';
+import { LaundryVariantEntity } from './features/laundry-variant/entities/laundry-variant.entity';
 import { InvoiceEntity } from './features/invoice/entities/invoice.entity';
 import { CustomerEntity } from './features/customer/entities/customer.entity';
 import { CashierEntity } from './features/cashier/entities/cashier.entity';
+import { LaundryCategoryEntity } from './features/laundry-category/entities/laundry-category.entity';
+import { LaundryCategoryController } from './features/laundry-category/controllers/laundry-category.controller';
+import { LaundryCategoryService } from './features/laundry-category/services/laundry-category.service';
 
 @Module({
   imports: [
@@ -44,7 +47,8 @@ import { CashierEntity } from './features/cashier/entities/cashier.entity';
         UserEntity,
         SalesTypeEntity,
         OutletEntity,
-        LaundryEntity,
+        LaundryVariantEntity,
+        LaundryCategoryEntity,
         InvoiceEntity,
         CustomerEntity,
         CashierEntity,
@@ -58,7 +62,8 @@ import { CashierEntity } from './features/cashier/entities/cashier.entity';
       UserEntity,
       SalesTypeEntity,
       OutletEntity,
-      LaundryEntity,
+      LaundryVariantEntity,
+      LaundryCategoryEntity,
       InvoiceEntity,
       CustomerEntity,
       CashierEntity,
@@ -71,7 +76,8 @@ import { CashierEntity } from './features/cashier/entities/cashier.entity';
     UserController,
     SalesTypeController,
     OutletController,
-    LaundryController,
+    LaundryVariantController,
+    LaundryCategoryController,
     InvoiceController,
     CustomerController,
     CashierController,
@@ -83,7 +89,8 @@ import { CashierEntity } from './features/cashier/entities/cashier.entity';
     UserService,
     SalesTypeService,
     OutletService,
-    LaundryService,
+    LaundryVariantService,
+    LaundryCategoryService,
     InvoiceService,
     CustomerService,
     CashierService,

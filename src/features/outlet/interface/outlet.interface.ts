@@ -1,3 +1,5 @@
+import { LaundryVariantInterface } from '../../../features/laundry-variant/interface/laundry-variant.interface';
+import { CashierInterface } from '../../../features/cashier/interface/cashier.interface';
 import { UserInterface } from '../../../features/user/interface/user.interface';
 
 export interface OutletInterface {
@@ -12,7 +14,9 @@ export interface OutletInterface {
   updated_at?: Date;
   deleted_at?: Date;
   user_uuid: string;
-  user: UserInterface;
+  user?: UserInterface;
+  cashiers?: CashierInterface[];
+  laundry_variants?: LaundryVariantInterface[];
 }
 
 export enum OutletStatusEnum {

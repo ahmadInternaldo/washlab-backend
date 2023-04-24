@@ -4,21 +4,21 @@ import { AppService } from './features/uptime-server/app.service';
 import { UserController } from './features/user/controllers/user.controller';
 import { SalesTypeController } from './features/sales-type/controllers/sales-type.controller';
 import { OutletController } from './features/outlet/controllers/outlet.controller';
-import { LaundryController } from './features/laundry/controllers/laundry.controller';
+import { LaundryVariantController } from './features/laundry-variant/controllers/laundry-variant.controller';
 import { InvoiceController } from './features/invoice/controllers/invoice.controller';
 import { CustomerController } from './features/customer/controllers/customer.controller';
 import { CashierController } from './features/cashier/controllers/cashier.controller';
 import { UserService } from './features/user/services/user.service';
 import { SalesTypeService } from './features/sales-type/services/sales-type.service';
 import { OutletService } from './features/outlet/services/outlet.service';
-import { LaundryService } from './features/laundry/services/laundry.service';
+import { LaundryVariantService } from './features/laundry-variant/services/laundry-variant.service';
 import { InvoiceService } from './features/invoice/services/invoice.service';
 import { CustomerService } from './features/customer/services/customer.service';
 import { CashierService } from './features/cashier/services/cashier.service';
 import { UserEntity } from './features/user/entities/user.entity';
 import { SalesTypeEntity } from './features/sales-type/entities/sales-type.entity';
 import { OutletEntity } from './features/outlet/entities/outlet.entity';
-import { LaundryEntity } from './features/laundry/entities/laundry.entity';
+import { LaundryVariantEntity } from './features/laundry-variant/entities/laundry-variant.entity';
 import { InvoiceEntity } from './features/invoice/entities/invoice.entity';
 import { CustomerEntity } from './features/customer/entities/customer.entity';
 import { CashierEntity } from './features/cashier/entities/cashier.entity';
@@ -31,7 +31,16 @@ import { ProductController } from './features/product/controllers/product.contro
 import { ProductService } from './features/product/services/product.service';
 import { TemplateService } from './features/template/services/template.service';
 import { UserRoleEnum } from './features/user/interface/user.interface';
-import { OutletStatusEnum } from './features/outlet/interface/outlet.interface';
+import {
+  OutletInterface,
+  OutletStatusEnum,
+} from './features/outlet/interface/outlet.interface';
+import { CashierStatusEnum } from './features/cashier/interface/cashier.interface';
+import { LaundryVariantStatusEnum } from './features/laundry-variant/interface/laundry-variant.interface';
+import { LaundryCategoryController } from './features/laundry-category/controllers/laundry-category.controller';
+import { LaundryCategoryEntity } from './features/laundry-category/entities/laundry-category.entity';
+import { LaundryCategoryStatusEnum } from './features/laundry-category/interface/laundry-category.interface';
+import { LaundryCategoryService } from './features/laundry-category/services/laundry-category.service';
 
 describe('Controller Test', () => {
   // Initiate controller
@@ -40,7 +49,8 @@ describe('Controller Test', () => {
   let userController: UserController;
   let cashierController: CashierController;
   let outletController: OutletController;
-  let laundryController: LaundryController;
+  let laundryVariantController: LaundryVariantController;
+  let laundryCategoryController: LaundryCategoryController;
   let invoiceController: InvoiceController;
   let customerController: CustomerController;
   let salesTypeController: SalesTypeController;
@@ -52,7 +62,8 @@ describe('Controller Test', () => {
   let user: UserEntity;
   let cashier: CashierEntity;
   let outlet: OutletEntity;
-  let laundry: LaundryEntity;
+  let laundryVariant: LaundryVariantEntity;
+  let laundryCategory: LaundryCategoryEntity;
   let invoice: InvoiceEntity;
   let customer: CustomerEntity;
   let salesType: SalesTypeEntity;
@@ -83,7 +94,8 @@ describe('Controller Test', () => {
             UserEntity,
             SalesTypeEntity,
             OutletEntity,
-            LaundryEntity,
+            LaundryVariantEntity,
+            LaundryCategoryEntity,
             InvoiceEntity,
             CustomerEntity,
             CashierEntity,
@@ -99,7 +111,8 @@ describe('Controller Test', () => {
           UserEntity,
           SalesTypeEntity,
           OutletEntity,
-          LaundryEntity,
+          LaundryVariantEntity,
+          LaundryCategoryEntity,
           InvoiceEntity,
           CustomerEntity,
           CashierEntity,
@@ -113,7 +126,8 @@ describe('Controller Test', () => {
         UserController,
         SalesTypeController,
         OutletController,
-        LaundryController,
+        LaundryVariantController,
+        LaundryCategoryController,
         InvoiceController,
         CustomerController,
         CashierController,
@@ -126,7 +140,8 @@ describe('Controller Test', () => {
         UserService,
         SalesTypeService,
         OutletService,
-        LaundryService,
+        LaundryVariantService,
+        LaundryCategoryService,
         InvoiceService,
         CustomerService,
         CashierService,
@@ -140,7 +155,12 @@ describe('Controller Test', () => {
     userController = app.get<UserController>(UserController);
     cashierController = app.get<CashierController>(CashierController);
     outletController = app.get<OutletController>(OutletController);
-    laundryController = app.get<LaundryController>(LaundryController);
+    laundryVariantController = app.get<LaundryVariantController>(
+      LaundryVariantController,
+    );
+    laundryCategoryController = app.get<LaundryCategoryController>(
+      LaundryCategoryController,
+    );
     invoiceController = app.get<InvoiceController>(InvoiceController);
     customerController = app.get<CustomerController>(CustomerController);
     salesTypeController = app.get<SalesTypeController>(SalesTypeController);
@@ -226,40 +246,6 @@ describe('Controller Test', () => {
     });
   });
 
-  // Cashier test
-  describe('cashier', () => {
-    it('should create cashier', async () => {
-      const data = await cashierController.createCashier({ name: 'string' });
-      cashier = data;
-      expect(data).toBeDefined();
-    });
-
-    it('should find certain cashiers', async () => {
-      const datas = await cashierController.findAllCashier({
-        page: '10',
-        limit: '10',
-      });
-      expect(datas).toBeDefined();
-    });
-
-    it('should find one cashier', async () => {
-      const data = await cashierController.findOneCashier(cashier.uuid);
-      expect(data).toBeDefined();
-    });
-
-    it('should update cashier', async () => {
-      const data = await cashierController.updateCashier(cashier.uuid, {
-        full_name: 'string',
-      });
-      expect(data).toBeDefined();
-    });
-
-    it('should delete cashier', async () => {
-      const data = await cashierController.deleteCashier(cashier.uuid);
-      expect(data).toBeDefined();
-    });
-  });
-
   // Outlet test
   describe('outlet', () => {
     it('should create outlet', async () => {
@@ -271,6 +257,8 @@ describe('Controller Test', () => {
         created_at: new Date(),
         user_uuid: user.uuid,
         user: user,
+        cashiers: [],
+        laundry_variants: [],
       });
       outlet = data;
       expect(data).toBeDefined();
@@ -297,36 +285,129 @@ describe('Controller Test', () => {
     });
   });
 
-  // Laundry test
-  describe('laundry', () => {
-    it('should create laundry', async () => {
-      const data = await laundryController.createLaundry({ name: 'string' });
-      laundry = data;
+  // Cashier test
+  describe('cashier', () => {
+    it('should create cashier', async () => {
+      const data = await cashierController.createCashier({
+        username: 'cashier1',
+        hash: 'password',
+        address: 'address1',
+        phone: '081222631994',
+        status: CashierStatusEnum.ACTIVE,
+        creator_uuid: user.uuid,
+        created_at: new Date(),
+        outlet_uuid: outlet.uuid,
+      });
+      cashier = data;
       expect(data).toBeDefined();
     });
 
-    it('should find certain laundries', async () => {
-      const datas = await laundryController.findAllLaundry({
+    it('should find certain cashiers', async () => {
+      const datas = await cashierController.findAllCashier({
         page: '10',
         limit: '10',
       });
       expect(datas).toBeDefined();
     });
 
-    it('should find one laundry', async () => {
-      const data = await laundryController.findOneLaundry(laundry.uuid);
+    it('should find one cashier', async () => {
+      const data = await cashierController.findOneCashier(cashier.uuid);
       expect(data).toBeDefined();
     });
 
-    it('should update laundry', async () => {
-      const data = await laundryController.updateLaundry(laundry.uuid, {
+    it('should update cashier', async () => {
+      const data = await cashierController.updateCashier(cashier.uuid, {
         full_name: 'string',
       });
       expect(data).toBeDefined();
     });
+  });
 
-    it('should delete laundry', async () => {
-      const data = await laundryController.deleteLaundry(laundry.uuid);
+  // Laundry category test
+  describe('laundry-category', () => {
+    it('should create laundry category', async () => {
+      const data = await laundryCategoryController.createLaundryCategory({
+        name: 'string',
+        status: LaundryCategoryStatusEnum.ACTIVE,
+      });
+      laundryCategory = data;
+      expect(data).toBeDefined();
+    });
+
+    it('should find certain laundry-categories', async () => {
+      const datas = await laundryCategoryController.findAllLaundryCategory({
+        page: '10',
+        limit: '10',
+      });
+      expect(datas).toBeDefined();
+    });
+
+    it('should find one laundry category', async () => {
+      const data = await laundryCategoryController.findOneLaundryCategory(
+        laundryCategory.uuid,
+      );
+      expect(data).toBeDefined();
+    });
+
+    it('should update laundry category', async () => {
+      const data = await laundryCategoryController.updateLaundryCategory(
+        laundryCategory.uuid,
+        {
+          full_name: 'string',
+        },
+      );
+      expect(data).toBeDefined();
+    });
+  });
+
+  // Laundry variant test
+  describe('laundry-variant', () => {
+    it('should create laundry variant', async () => {
+      const dataOutlet = {
+        uuid: outlet.uuid,
+        name: outlet.name,
+        code: outlet.code,
+        status: outlet.status,
+        creator_uuid: outlet.creator_uuid,
+        created_at: outlet.created_at,
+        user_uuid: outlet.user_uuid,
+      };
+      const data = await laundryVariantController.createLaundryVariant({
+        name: 'string',
+        code: 'LNDR00002',
+        status: LaundryVariantStatusEnum.ACTIVE,
+        price: 0,
+        pict_url: 'src',
+        creator_uuid: user.uuid,
+        created_at: new Date(),
+        outlets: [dataOutlet],
+      });
+      laundryVariant = data;
+      expect(data).toBeDefined();
+    });
+
+    it('should find certain laundry-variants', async () => {
+      const datas = await laundryVariantController.findAllLaundryVariant({
+        page: '10',
+        limit: '10',
+      });
+      expect(datas).toBeDefined();
+    });
+
+    it('should find one laundry variant', async () => {
+      const data = await laundryVariantController.findOneLaundryVariant(
+        laundryVariant.uuid,
+      );
+      expect(data).toBeDefined();
+    });
+
+    it('should update laundry variant', async () => {
+      const data = await laundryVariantController.updateLaundryVariant(
+        laundryVariant.uuid,
+        {
+          full_name: 'string',
+        },
+      );
       expect(data).toBeDefined();
     });
   });
@@ -477,6 +558,18 @@ describe('Controller Test', () => {
 
     it('should delete user', async () => {
       const data = await userController.deleteUser(user.uuid);
+      expect(data).toBeDefined();
+    });
+
+    it('should delete cashier', async () => {
+      const data = await cashierController.deleteCashier(cashier.uuid);
+      expect(data).toBeDefined();
+    });
+
+    it('should delete laundry variant', async () => {
+      const data = await laundryVariantController.deleteLaundryVariant(
+        laundryVariant.uuid,
+      );
       expect(data).toBeDefined();
     });
   });

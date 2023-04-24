@@ -3,7 +3,10 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import {
@@ -12,6 +15,10 @@ import {
 } from '../interface/outlet.interface';
 import { UserEntity } from '../../../features/user/entities/user.entity';
 import { UserInterface } from '../../../features/user/interface/user.interface';
+import { CashierEntity } from '../../../features/cashier/entities/cashier.entity';
+import { CashierInterface } from '../../../features/cashier/interface/cashier.interface';
+import { LaundryVariantEntity } from '../../../features/laundry-variant/entities/laundry-variant.entity';
+import { LaundryVariantInterface } from '../../../features/laundry-variant/interface/laundry-variant.interface';
 
 @Entity('outlets')
 export class OutletEntity extends BaseEntity implements OutletInterface {
@@ -61,5 +68,21 @@ export class OutletEntity extends BaseEntity implements OutletInterface {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_uuid' })
-  user: UserInterface;
+  user?: UserInterface;
+
+  @OneToMany(() => CashierEntity, (cashier) => cashier.outlet, {
+    cascade: true,
+  })
+  cashiers?: CashierInterface[];
+
+  @ManyToMany(
+    () => LaundryVariantEntity,
+    (laundryVariant) => laundryVariant.uuid,
+  )
+  @JoinTable({
+    name: 'outlet_lvo_laundry_variants',
+    joinColumn: { name: 'laundry_variant_uuid' },
+    inverseJoinColumn: { name: 'outlet_uuid' },
+  })
+  laundry_variants?: LaundryVariantInterface[];
 }

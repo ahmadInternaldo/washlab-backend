@@ -1,4 +1,4 @@
-import { OutletInterface } from 'src/features/outlet/interface/outlet.interface';
+import { OutletInterface } from '../../../features/outlet/interface/outlet.interface';
 import { UserInterface, UserRoleEnum } from '../interface/user.interface';
 
 export class UserCreateDto implements UserInterface {

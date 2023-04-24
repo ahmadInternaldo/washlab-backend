@@ -1,8 +1,10 @@
-import { UserInterface } from 'src/features/user/interface/user.interface';
+import { UserInterface } from '../../../features/user/interface/user.interface';
 import {
   OutletInterface,
   OutletStatusEnum,
 } from '../interface/outlet.interface';
+import { CashierInterface } from '../../../features/cashier/interface/cashier.interface';
+import { LaundryVariantInterface } from '../../../features/laundry-variant/interface/laundry-variant.interface';
 
 export class OutletCreateDto implements OutletInterface {
   name: string;
@@ -16,5 +18,7 @@ export class OutletCreateDto implements OutletInterface {
   updated_at?: Date;
   deleted_at?: Date;
   user_uuid: string;
-  user: UserInterface;
+  user?: UserInterface;
+  cashiers?: CashierInterface[];
+  laundry_variants?: LaundryVariantInterface[];
 }
