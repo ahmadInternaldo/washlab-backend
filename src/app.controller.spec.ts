@@ -572,5 +572,12 @@ describe('Controller Test', () => {
       );
       expect(data).toBeDefined();
     });
+
+    it('should delete laundry category', async () => {
+      const data = await laundryCategoryController.deleteLaundryCategory(
+        laundryCategory.uuid,
+      );
+      expect(data).toBeDefined();
+    });
   });
 });
